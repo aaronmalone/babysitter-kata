@@ -49,6 +49,7 @@ public class BabySitterChargeCalculator {
 	 */
 	public static int calculateNightlyCharge(LocalTime startTime, LocalTime bedTime, LocalTime endTime) {
 		Preconditions.checkArgument(!startTime.isBefore(FIVE_PM), "Start time is before 5pm: %s", startTime);
+		Preconditions.checkArgument(!bedTime.isBefore(startTime), "Bed time is before start time.");
 		return Integer.MIN_VALUE;
 	}
 }
