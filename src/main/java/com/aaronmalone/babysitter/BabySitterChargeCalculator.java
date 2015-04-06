@@ -8,31 +8,30 @@ import java.time.LocalTime;
  * Class for calculating the amount charged by a babysitter according to the
  * following rules:
  * <ul>
- *     <li>The babysitter starts no earlier than 5:00PM.</li>
- *     <li>The babysitter leaves no later than 4:00AM.</li>
- *     <li>The babysitter gets paid $12/hour from start-time to bedtime.</li>
- *     <li>The babysitter gets paid $8/hour from bedtime to midnight.</li>
- *     <li>The babysitter gets paid $16/hour from midnight to end of job.</li>
- *     <li>The babysitter gets paid for full hours (no fractional hours).</li>
+ * <li>The babysitter starts no earlier than 5:00PM.</li>
+ * <li>The babysitter leaves no later than 4:00AM.</li>
+ * <li>The babysitter gets paid $12/hour from start-time to bedtime.</li>
+ * <li>The babysitter gets paid $8/hour from bedtime to midnight.</li>
+ * <li>The babysitter gets paid $16/hour from midnight to end of job.</li>
+ * <li>The babysitter gets paid for full hours (no fractional hours).</li>
  * </ul>
- * <p>
+ * <p/>
  * Additionally, I'll add this clarification based on my understanding of the
  * kata:
  * <ul>
- *     <li>Bedtime never occurs after midnight, but may happen any time between the
- *     start time and midnight (inclusive). Every night have a bedtime.</li>
+ * <li>Bedtime never occurs after midnight, but may happen any time between the
+ * start time and midnight (inclusive). Every night have a bedtime.</li>
  * </ul>
- * <p>
+ * <p/>
  * The babysitter gets paid for full hours, and there are no fractional hours
  * in the calculation of the nightly charge. This does not specify how
  * fractions of an hour should be figured. I will assume the following are true:
  * <ul>
- *     <li>Each rate will be multiplied by a whole number of hours to calculate
- *     the overall charge.</li>
- *     <li>The number of hours for each rate, added together, should equal the
- *     total number of hours for the night (rounded to the nearest whole).</li>
+ * <li>Each rate will be multiplied by a whole number of hours to calculate
+ * the overall charge.</li>
+ * <li>The number of hours for each rate, added together, should equal the
+ * total number of hours for the night (rounded to the nearest whole).</li>
  * </ul>
- *
  */
 @SuppressWarnings("OctalInteger") //so we can use "00" for minutes
 public class BabySitterChargeCalculator {
