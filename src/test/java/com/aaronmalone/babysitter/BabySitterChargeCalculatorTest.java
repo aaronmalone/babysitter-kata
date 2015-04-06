@@ -35,12 +35,15 @@ public class BabySitterChargeCalculatorTest {
 	public void testThatBedTimeNotBeforeStartTime() {
 		LocalTime startTime = time(18, 00);
 		LocalTime invalidBedTime = time(17, 15);
+		LocalTime bedTime = time(11, 00);
 		try {
-			BabySitterChargeCalculator.calculateNightlyCharge(startTime, invalidBedTime, invalidBedTime.plusHours(1));
+			BabySitterChargeCalculator.calculateNightlyCharge(startTime, invalidBedTime, bedTime);
 			Assert.fail();
 		} catch (IllegalArgumentException e) {
 			// we expected this
 		}
+		LocalTime earlierStartTime = time(17, 10);
+		BabySitterChargeCalculator.calculateNightlyCharge(earlierStartTime, invalidBedTime, bedTime);
 	}
 
 	/**
