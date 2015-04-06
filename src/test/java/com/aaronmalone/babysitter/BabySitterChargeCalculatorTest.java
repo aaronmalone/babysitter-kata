@@ -46,6 +46,19 @@ public class BabySitterChargeCalculatorTest {
 		BabySitterChargeCalculator.calculateNightlyCharge(earlierStartTime, invalidBedTime, bedTime);
 	}
 
+	@Test
+	public void testThatEndTimeNotBeforeBedTime() {
+		LocalTime startTime = time(18, 00);
+		LocalTime bedTime = time(20, 00);
+		LocalTime invalidEndTime = time(19, 00);
+		try {
+			BabySitterChargeCalculator.calculateNightlyCharge(startTime, bedTime, invalidEndTime);
+			Assert.fail();
+		} catch (IllegalArgumentException e) {
+			// we expected this
+		}
+	}
+
 	/**
 	 * A really short way to get a {@link LocalTime}.
 	 * Based on a 24-hour day (e.g. 16 hours is 4pm)
