@@ -1,5 +1,7 @@
 package com.aaronmalone.babysitter;
 
+import com.google.common.base.Preconditions;
+
 import java.time.LocalTime;
 
 /**
@@ -46,9 +48,7 @@ public class BabySitterChargeCalculator {
 	 * @return the total charge, in dollars, for the night of babysitting
 	 */
 	public static int calculateNightlyCharge(LocalTime startTime, LocalTime bedTime, LocalTime endTime) {
-		if (startTime.isBefore(FIVE_PM)) {
-			throw new IllegalArgumentException("Start time is before 5pm: " + startTime);
-		}
+		Preconditions.checkArgument(!startTime.isBefore(FIVE_PM), "Start time is before 5pm: %s", startTime);
 		return Integer.MIN_VALUE;
 	}
 }
