@@ -32,16 +32,23 @@ import java.time.LocalTime;
  * </ul>
  *
  */
+@SuppressWarnings("OctalInteger") //so we can use "00" for minutes
 public class BabySitterChargeCalculator {
+
+	private static final LocalTime FIVE_PM = LocalTime.of(17, 00);
 
 	/**
 	 * Calculate the charge for a night of babysitting.
+	 *
 	 * @param startTime the time at which babysitting begins.
-	 * @param bedTime the time when the children go to bed.
-	 * @param endTime the the when babysitting ends.
+	 * @param bedTime   the time when the children go to bed.
+	 * @param endTime   the the when babysitting ends.
 	 * @return the total charge, in dollars, for the night of babysitting
 	 */
 	public static int calculateNightlyCharge(LocalTime startTime, LocalTime bedTime, LocalTime endTime) {
+		if (startTime.isBefore(FIVE_PM)) {
+			throw new IllegalArgumentException("Start time is before 5pm: " + startTime);
+		}
 		return Integer.MIN_VALUE;
 	}
 }
