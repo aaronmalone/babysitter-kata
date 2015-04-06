@@ -28,6 +28,22 @@ public class BabySitterChargeCalculatorTest {
 	}
 
 	/**
+	 * Test that an {@link java.lang.IllegalArgumentException} is thrown if
+	 * the bed time is before the start time.
+	 */
+	@Test
+	public void testThatBedTimeNotBeforeStartTime() {
+		LocalTime startTime = time(18, 00);
+		LocalTime invalidBedTime = time(17, 15);
+		try {
+			BabySitterChargeCalculator.calculateNightlyCharge(startTime, invalidBedTime, invalidBedTime.plusHours(1));
+			Assert.fail();
+		} catch (IllegalArgumentException e) {
+			// we expected this
+		}
+	}
+
+	/**
 	 * A really short way to get a {@link LocalTime}.
 	 * Based on a 24-hour day (e.g. 16 hours is 4pm)
 	 */
