@@ -41,6 +41,7 @@ import java.time.LocalTime;
 public class BabySitterChargeCalculator {
 
 	private static final LocalTime FIVE_PM = LocalTime.of(17, 00);
+	private static final LocalTime FOUR_AM = LocalTime.of(4, 00);
 
 	/**
 	 * Calculate the charge for a night of babysitting.
@@ -56,6 +57,11 @@ public class BabySitterChargeCalculator {
 		Preconditions.checkArgument(!startTime.isBefore(FIVE_PM), "Start time is before 5pm: %s", startTime);
 		Preconditions.checkArgument(!bedTime.isBefore(startTime), "Bed time is before start time.");
 		Preconditions.checkArgument(!endTime.isBefore(bedTime), "End time is before bed time.");
+		Preconditions.checkArgument(endTimeNotAfter4am(endTime), "End time is after 4am: %s", endTime);
 		return Integer.MIN_VALUE;
+	}
+
+	private static boolean endTimeNotAfter4am(LocalTime endTime) {
+		return endTime.isBefore(LocalTime.MAX) || !endTime.isAfter(FOUR_AM);
 	}
 }
