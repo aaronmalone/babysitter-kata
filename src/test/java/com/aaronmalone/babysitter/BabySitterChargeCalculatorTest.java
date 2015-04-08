@@ -55,7 +55,7 @@ public class BabySitterChargeCalculatorTest {
 			BabySitterChargeCalculator.calculateNightlyCharge(startTime, bedTime, invalidEndTime);
 			Assert.fail();
 		} catch (IllegalArgumentException e) {
-
+			Assert.assertEquals("End time is before bed time.", e.getMessage());
 			// we expected this
 		}
 	}
