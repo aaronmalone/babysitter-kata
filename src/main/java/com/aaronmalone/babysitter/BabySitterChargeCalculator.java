@@ -55,12 +55,16 @@ public class BabySitterChargeCalculator {
 	 * @return the total charge, in dollars, for the night of babysitting
 	 */
 	public static int calculateNightlyCharge(LocalTime startTime, LocalTime bedTime, LocalTime endTime) {
+		checkArguments(startTime, bedTime, endTime);
+		return Integer.MIN_VALUE;
+	}
+
+	private static void checkArguments(LocalTime startTime, LocalTime bedTime, LocalTime endTime) {
 		Preconditions.checkArgument(!startTime.isBefore(FIVE_PM), "Start time is before 5pm: %s", startTime);
 		Preconditions.checkArgument(endTimeNotAfter4am(endTime), "End time is after 4am: %s", endTime);
 		Preconditions.checkArgument(bedTimeNotAfterMidnight(bedTime), "Bed time is after midnight: %s", bedTime);
 		Preconditions.checkArgument(!bedTime.isBefore(startTime), "Bed time is before start time.");
 		Preconditions.checkArgument(endTimeNotBeforeBedTime(bedTime, endTime), "End time is before bed time.");
-		return Integer.MIN_VALUE;
 	}
 
 	private static boolean endTimeNotAfter4am(LocalTime endTime) {
