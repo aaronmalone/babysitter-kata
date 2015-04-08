@@ -40,6 +40,7 @@ public class BabySitterChargeCalculatorTest {
 			BabySitterChargeCalculator.calculateNightlyCharge(startTime, invalidBedTime, endTime);
 			Assert.fail();
 		} catch (IllegalArgumentException e) {
+			Assert.assertTrue(e.getMessage().contains("Bed time is before start time."));
 			// we expected this
 		}
 		LocalTime earlierStartTime = time(17, 10);
