@@ -77,6 +77,22 @@ public class BabySitterChargeCalculatorTest {
 	}
 
 	@Test
+	public void testThatBedTimeNotAfterMidnight() {
+		LocalTime startTime = time(17, 00);
+		LocalTime endTime = time(4, 00);
+		LocalTime[] invalidBedTimes = {time(0, 15), time(1, 00), time(3, 59)};
+		for (LocalTime bedTime : invalidBedTimes) {
+			try {
+				BabySitterChargeCalculator.calculateNightlyCharge(startTime, bedTime, endTime);
+				Assert.fail();
+			} catch (IllegalArgumentException e) {
+				// we expected this
+				Assert.assertTrue(e.getMessage().contains("Bed time is after midnight: "));
+			}
+		}
+	}
+
+	@Test
 	public void testBetweenInclusive() {
 		expectBetweenInclusiveReturnsTrue(LocalTime.MIDNIGHT, time(4, 00), LocalTime.MIDNIGHT);
 		expectBetweenInclusiveReturnsTrue(LocalTime.MIDNIGHT, time(4, 00), time(4, 00));
