@@ -19,7 +19,7 @@ public class BabySitterChargeCalculatorTest {
 			LocalTime bedTime = startTime.plusHours(1);
 			LocalTime endTime = startTime.plusHours(2);
 			try {
-				BabySitterChargeCalculator.calculateNightlyCharge(startTime, bedTime, endTime);
+				BabySitterChargeCalculator.checkArguments(startTime, bedTime, endTime);
 				Assert.fail();
 			} catch (IllegalArgumentException e) {
 				// we expected this
@@ -37,14 +37,14 @@ public class BabySitterChargeCalculatorTest {
 		LocalTime invalidBedTime = time(17, 15);
 		LocalTime endTime = time(23, 00);
 		try {
-			BabySitterChargeCalculator.calculateNightlyCharge(startTime, invalidBedTime, endTime);
+			BabySitterChargeCalculator.checkArguments(startTime, invalidBedTime, endTime);
 			Assert.fail();
 		} catch (IllegalArgumentException e) {
 			Assert.assertTrue(e.getMessage().contains("Bed time is before start time."));
 			// we expected this
 		}
 		LocalTime earlierStartTime = time(17, 10);
-		BabySitterChargeCalculator.calculateNightlyCharge(earlierStartTime, invalidBedTime, endTime);
+		BabySitterChargeCalculator.checkArguments(earlierStartTime, invalidBedTime, endTime);
 	}
 
 	@Test
@@ -53,7 +53,7 @@ public class BabySitterChargeCalculatorTest {
 		LocalTime bedTime = time(20, 00);
 		LocalTime invalidEndTime = time(19, 00);
 		try {
-			BabySitterChargeCalculator.calculateNightlyCharge(startTime, bedTime, invalidEndTime);
+			BabySitterChargeCalculator.checkArguments(startTime, bedTime, invalidEndTime);
 			Assert.fail();
 		} catch (IllegalArgumentException e) {
 			Assert.assertEquals("End time is before bed time.", e.getMessage());
@@ -68,7 +68,7 @@ public class BabySitterChargeCalculatorTest {
 		LocalTime[] invalidEndTimes = {time(4, 10), time(5, 00), time(11, 00), time(16, 00)};
 		for (LocalTime endTime : invalidEndTimes) {
 			try {
-				BabySitterChargeCalculator.calculateNightlyCharge(startTime, bedTime, endTime);
+				BabySitterChargeCalculator.checkArguments(startTime, bedTime, endTime);
 				Assert.fail();
 			} catch (IllegalArgumentException e) {
 				// we expected this
@@ -84,7 +84,7 @@ public class BabySitterChargeCalculatorTest {
 		LocalTime[] invalidBedTimes = {time(0, 15), time(1, 00), time(3, 59)};
 		for (LocalTime bedTime : invalidBedTimes) {
 			try {
-				BabySitterChargeCalculator.calculateNightlyCharge(startTime, bedTime, endTime);
+				BabySitterChargeCalculator.checkArguments(startTime, bedTime, endTime);
 				Assert.fail();
 			} catch (IllegalArgumentException e) {
 				// we expected this
