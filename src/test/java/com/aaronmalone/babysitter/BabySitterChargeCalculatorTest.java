@@ -22,7 +22,7 @@ public class BabySitterChargeCalculatorTest {
 				BabySitterChargeCalculator.calculateNightlyCharge(startTime, bedTime, endTime);
 				Assert.fail();
 			} catch (IllegalArgumentException e) {
-				//we expected this
+				// we expected this
 			}
 		}
 	}
@@ -55,7 +55,24 @@ public class BabySitterChargeCalculatorTest {
 			BabySitterChargeCalculator.calculateNightlyCharge(startTime, bedTime, invalidEndTime);
 			Assert.fail();
 		} catch (IllegalArgumentException e) {
+
 			// we expected this
+		}
+	}
+
+	@Test
+	public void testThatEndTimeBefore4AM() {
+		LocalTime startTime = time(17, 00);
+		LocalTime bedTime = time(21, 00);
+		LocalTime[] invalidEndTimes = {time(4, 10), time(5, 00), time(11, 00), time(16, 00)};
+		for (LocalTime endTime : invalidEndTimes) {
+			try {
+				BabySitterChargeCalculator.calculateNightlyCharge(startTime, bedTime, endTime);
+				Assert.fail();
+			} catch (IllegalArgumentException e) {
+				// we expected this
+				Assert.assertTrue(e.getMessage().contains("End time is after 4am: "));
+			}
 		}
 	}
 
