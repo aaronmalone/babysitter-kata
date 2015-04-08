@@ -78,6 +78,8 @@ public class BabySitterChargeCalculator {
 	 */
 	@VisibleForTesting
 	static boolean betweenInclusive(LocalTime begin, LocalTime end, LocalTime timeToCheck) {
-		throw new UnsupportedOperationException();
+		Preconditions.checkArgument(!end.isBefore(begin), "End time (%s) is before begin time (%s).", end, begin);
+		boolean between = timeToCheck.isAfter(begin) && timeToCheck.isBefore(end);
+		return between || timeToCheck.equals(begin) || timeToCheck.equals(end);
 	}
 }
