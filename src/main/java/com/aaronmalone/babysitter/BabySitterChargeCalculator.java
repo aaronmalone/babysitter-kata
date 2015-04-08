@@ -1,5 +1,6 @@
 package com.aaronmalone.babysitter;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
 
 import java.time.LocalTime;
@@ -63,5 +64,20 @@ public class BabySitterChargeCalculator {
 
 	private static boolean endTimeNotAfter4am(LocalTime endTime) {
 		return endTime.isBefore(LocalTime.MAX) || !endTime.isAfter(FOUR_AM);
+	}
+
+	/**
+	 * Checks that a {@link LocalTime} is between two times.
+	 *
+	 * @param begin       the beginning of the time period, inclusive
+	 * @param end         the end of the time period, inclusive
+	 * @param timeToCheck the time to check
+	 * @return true if the time is between the two times or equal to one of them
+	 * @throws java.lang.IllegalArgumentException if the endTime is before the
+	 *                                            start time using {@link LocalTime#isBefore(LocalTime)}
+	 */
+	@VisibleForTesting
+	static boolean betweenInclusive(LocalTime begin, LocalTime end, LocalTime timeToCheck) {
+		throw new UnsupportedOperationException();
 	}
 }

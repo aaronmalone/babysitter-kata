@@ -76,6 +76,27 @@ public class BabySitterChargeCalculatorTest {
 		}
 	}
 
+	@Test
+	public void testBetweenInclusive() {
+		expectBetweenInclusiveReturnsTrue(LocalTime.MIDNIGHT, time(4, 00), LocalTime.MIDNIGHT);
+		expectBetweenInclusiveReturnsTrue(LocalTime.MIDNIGHT, time(4, 00), time(4, 00));
+		expectBetweenInclusiveReturnsTrue(LocalTime.MIDNIGHT, time(4, 00), time(0, 30));
+		expectBetweenInclusiveReturnsTrue(LocalTime.MIDNIGHT, time(4, 00), time(3, 30));
+		expectBetweenInclusiveReturnsFalse(LocalTime.MIDNIGHT, time(4, 00), time(4, 10));
+		expectBetweenInclusiveReturnsFalse(LocalTime.MIDNIGHT, time(4, 00), time(5, 30));
+		expectBetweenInclusiveReturnsFalse(LocalTime.MIDNIGHT, time(4, 00), time(23, 00));
+	}
+
+	private void expectBetweenInclusiveReturnsTrue(LocalTime begin, LocalTime end, LocalTime timeToTest) {
+		boolean returnValue = BabySitterChargeCalculator.betweenInclusive(begin, end, timeToTest);
+		Assert.assertTrue(returnValue);
+	}
+
+	private void expectBetweenInclusiveReturnsFalse(LocalTime begin, LocalTime end, LocalTime timeToTest) {
+		boolean returnValue = BabySitterChargeCalculator.betweenInclusive(begin, end, timeToTest);
+		Assert.assertTrue(!returnValue);
+	}
+
 	/**
 	 * A really short way to get a {@link LocalTime}.
 	 * Based on a 24-hour day (e.g. 16 hours is 4pm)
