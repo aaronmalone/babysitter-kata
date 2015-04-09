@@ -43,9 +43,6 @@ public class BabySitterChargeCalculator {
 
 	private static final LocalTime FOUR_AM = LocalTime.of(4, 00);
 
-	private static final long NANOS_PER_HOUR = 60 * 60 * 1_000_000_000L;
-	private static final long NANOS_PER_DAY = 24 * NANOS_PER_HOUR;
-
 	@VisibleForTesting
 	static final int AFTER_MIDNIGHT_RATE = 16;
 
@@ -56,7 +53,6 @@ public class BabySitterChargeCalculator {
 	static final int AFTER_BEDTIME_RATE = 8;
 
 	private static final int HOUR_OF_5_PM = 17;
-
 
 	/**
 	 * Calculate the charge for a night of babysitting.
