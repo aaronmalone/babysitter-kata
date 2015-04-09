@@ -77,11 +77,16 @@ public class BabySitterChargeCalculator {
 
 	@VisibleForTesting
 	static void checkArguments(LocalTime startTime, LocalTime bedTime, LocalTime endTime) {
-		Preconditions.checkArgument(isEqualOrAfter(startTime, FIVE_PM), "Start time is before 5pm: %s", startTime);
+		Preconditions.checkArgument(startTimeNotBefore5pm(startTime), "Start time is before 5pm: %s", startTime);
 		Preconditions.checkArgument(endTimeNotAfter4am(endTime), "End time is after 4am: %s", endTime);
 		Preconditions.checkArgument(bedTimeNotAfterMidnight(bedTime), "Bed time is after midnight: %s", bedTime);
 		Preconditions.checkArgument(bedTimeNotBeforeStartTime(startTime, bedTime), "Bed time is before start time.");
 		Preconditions.checkArgument(endTimeNotBeforeBedTime(bedTime, endTime), "End time is before bed time.");
+	}
+
+	private static boolean startTimeNotBefore5pm(LocalTime startTime) {
+		int hour = startTime.getHour();
+		return hour >= 17 || hour == 0;
 	}
 
 	/**
