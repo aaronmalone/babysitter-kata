@@ -215,16 +215,6 @@ public class BabySitterChargeCalculatorTest {
 		Assert.assertEquals(100, calculateNightlyCharge(time(19, 15), time(21, 30), time(2, 10)));
 	}
 
-	@Test
-	public void testIsEqualOrAfter() {
-		Assert.assertTrue(isEqualOrAfter(time(17, 00), time(17, 00)));
-		Assert.assertTrue(isEqualOrAfter(time(17, 01), time(17, 00)));
-		Assert.assertTrue(isEqualOrAfter(LocalTime.MIDNIGHT, time(17, 00)));
-		Assert.assertTrue(isEqualOrAfter(LocalTime.MIDNIGHT, LocalTime.MAX));
-		Assert.assertTrue(isEqualOrAfter(time(0, 15), LocalTime.MIDNIGHT));
-		Assert.assertTrue(isEqualOrAfter(time(4, 00), LocalTime.MIDNIGHT));
-	}
-
 	/**
 	 * A really short way to get a {@link LocalTime}.
 	 * Based on a 24-hour day (e.g. 16 hours is 4pm)

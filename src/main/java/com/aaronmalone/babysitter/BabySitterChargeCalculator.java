@@ -89,14 +89,6 @@ public class BabySitterChargeCalculator {
 		return hour >= 17 || hour == 0;
 	}
 
-	/**
-	 * Tests whether the first {@link LocalTime} is equal to, or after, the second.
-	 */
-	@VisibleForTesting
-	static boolean isEqualOrAfter(LocalTime time1, LocalTime time2) {
-		return nanosAfter5pm(time1) >= nanosAfter5pm(time2);
-	}
-
 	private static long nanosAfter5pm(LocalTime time) {
 		int hour = time.getHour();
 		Preconditions.checkArgument(hour <= 4 || hour >= 17, "Invalid babysitting time: %s", time);
