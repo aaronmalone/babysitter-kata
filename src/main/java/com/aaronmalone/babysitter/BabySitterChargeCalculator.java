@@ -133,12 +133,27 @@ public class BabySitterChargeCalculator {
 	 */
 	@VisibleForTesting
 	static int hoursPreBedTime(LocalTime startTime, LocalTime bedTime) {
-		int startHour = startTime.getHour();
-		int bedHour = bedTime.getHour();
-		if (bedTime.isAfter(LocalTime.of(bedHour, 00))) {
-			return bedHour - startHour + 1;
+		if (bedTime.equals(startTime)) {
+			return 0;
+		} else if (bedTime.equals(LocalTime.MIDNIGHT)) {
+			return 24 - startTime.getHour();
 		} else {
+			int bedHour = getHourRoundUp(bedTime);
+			int startHour = startTime.getHour();
 			return bedHour - startHour;
+		}
+	}
+
+	/**
+	 * Returns the hour of the {@link LocalTime}, rounded up if the time has
+	 * passed the exactly n-o'clock.
+	 */
+	private static int getHourRoundUp(LocalTime t) {
+		int hour = t.getHour();
+		if (t.isAfter(LocalTime.of(hour, 00))) {
+			return hour + 1;
+		} else {
+			return hour;
 		}
 	}
 }
