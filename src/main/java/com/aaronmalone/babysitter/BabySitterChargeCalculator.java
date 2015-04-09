@@ -16,14 +16,14 @@ import java.time.LocalTime;
  * <li>The babysitter gets paid $16/hour from midnight to end of job.</li>
  * <li>The babysitter gets paid for full hours (no fractional hours).</li>
  * </ul>
- * <p/>
+ * <p>
  * Additionally, I'll add this clarification based on my understanding of the
  * kata:
  * <ul>
  * <li>Bedtime never occurs after midnight, but may happen any time between the
  * start time and midnight (inclusive). Every night has a bedtime.</li>
  * </ul>
- * <p/>
+ * <p>
  * The babysitter gets paid for full hours, and there are no fractional hours
  * in the calculation of the nightly charge. This does not specify how
  * fractions of an hour should be figured. This is how I will interpret it:
@@ -106,6 +106,17 @@ public class BabySitterChargeCalculator {
 	 * Fractional hours are rounded up to a whole hour.
 	 */
 	static int hoursAfterMidnight(LocalTime endTime) {
-		return Integer.MIN_VALUE;
+		//every LocalTime is after midnight using LocalTime.isAfter, so we'll have to be clever
+		if (betweenInclusive(FIVE_PM, LocalTime.MAX, endTime) || endTime.equals(LocalTime.MIDNIGHT)) {
+			return 0;
+		} else {
+			long nanosPerHour = 60 * 60 * 1_000_000_000L;
+			int wholeHours = endTime.getHour();
+			if (endTime.toNanoOfDay() % nanosPerHour > 0) {
+				return 1 + wholeHours;
+			} else {
+				return wholeHours;
+			}
+		}
 	}
 }
