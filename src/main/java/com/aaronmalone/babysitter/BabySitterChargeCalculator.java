@@ -126,4 +126,13 @@ public class BabySitterChargeCalculator {
 			return hour;
 		}
 	}
+
+	/**
+	 * Returns the number of hours worked between start time and bed time.
+	 * Fractional hours are rounded up to a whole hour.
+	 */
+	@VisibleForTesting
+	static int hoursPreBedTime(LocalTime startTime, LocalTime bedTime) {
+		return Integer.MIN_VALUE;
+	}
 }
