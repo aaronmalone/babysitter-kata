@@ -46,8 +46,12 @@ public class BabySitterChargeCalculator {
 
 	@VisibleForTesting
 	static final int AFTER_MIDNIGHT_RATE = 16;
+
 	@VisibleForTesting
 	static final int BEFORE_BEDTIME_RATE = 12;
+
+	@VisibleForTesting
+	static final int AFTER_BEDTIME_RATE = 8;
 
 
 	/**
