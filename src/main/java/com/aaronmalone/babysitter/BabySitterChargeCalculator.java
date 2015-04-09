@@ -110,7 +110,8 @@ public class BabySitterChargeCalculator {
 	}
 
 	/**
-	 * Returns the number of hours worked before midnight, based on the start time.
+	 * Returns the total number of hours worked before midnight, both pre- and post-bedtime,
+	 * based on the start time.
 	 * Fractional hours are rounded up to a whole hour.
 	 */
 	@VisibleForTesting
