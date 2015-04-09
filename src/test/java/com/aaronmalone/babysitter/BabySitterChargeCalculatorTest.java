@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.time.LocalTime;
 
 import static com.aaronmalone.babysitter.BabySitterChargeCalculator.hoursAfterMidnight;
+import static com.aaronmalone.babysitter.BabySitterChargeCalculator.hoursBeforeMidnight;
 
 @SuppressWarnings("OctalInteger") //so we can use "00" for minutes
 public class BabySitterChargeCalculatorTest {
@@ -135,6 +136,16 @@ public class BabySitterChargeCalculatorTest {
 			Assert.assertEquals(0, hoursAfterMidnight(endTime));
 		}
 		Assert.assertEquals(0, hoursAfterMidnight(LocalTime.MIDNIGHT));
+	}
+
+	@Test
+	public void testHoursBeforeMidnight() {
+		//note: static import BabySitterChargeCalculator.hoursBeforeMidnight
+		Assert.assertEquals(0, hoursBeforeMidnight(LocalTime.MIDNIGHT));
+		Assert.assertEquals(1, hoursBeforeMidnight(time(11, 59)));
+		Assert.assertEquals(1, hoursBeforeMidnight(LocalTime.MAX));
+		Assert.assertEquals(4, hoursBeforeMidnight(time(20, 00)));
+		Assert.assertEquals(5, hoursBeforeMidnight(time(19, 59)));
 	}
 
 	@Test
