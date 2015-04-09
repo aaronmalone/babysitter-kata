@@ -226,6 +226,7 @@ public class BabySitterChargeCalculatorTest {
 		LocalTime start = time(18, 00);
 		Assert.assertEquals(0, getChargeForAfterBedTime(start, LocalTime.MIDNIGHT, LocalTime.MIDNIGHT));
 		Assert.assertEquals(0, getChargeForAfterBedTime(start, time(22, 30), time(22, 30)));
+		Assert.assertEquals(0, getChargeForAfterBedTime(start, time(22, 01), time(22, 45)));
 	}
 
 	/**
