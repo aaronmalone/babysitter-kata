@@ -74,6 +74,10 @@ public class BabySitterChargeCalculator {
 		return beforeBedTimeCharge + afterBedTimeCharge + afterMidnightCharge;
 	}
 
+	/**
+	 * Check that all times fit within the rules outlined for this kata
+	 * and fall in the right order.
+	 */
 	@VisibleForTesting
 	static void checkArguments(LocalTime startTime, LocalTime bedTime, LocalTime endTime) {
 		Preconditions.checkArgument(isStartTimeNotBefore5pm(startTime), "Start time is before 5pm: %s", startTime);
