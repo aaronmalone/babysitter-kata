@@ -206,10 +206,15 @@ public class BabySitterChargeCalculatorTest {
 	}
 
 	@Test
-	public void testTotalCharge() {
+	public void testTotalChargeWithNoPreBedtimeCharge() {
+		//all cases have no pre-bedtime charge (nothing earned at the $12/rate)
 		Assert.assertEquals(56, calculateTotalCharge(time(17, 00), time(17, 00), LocalTime.MIDNIGHT));
 		Assert.assertEquals(72, calculateTotalCharge(time(17, 00), time(17, 00), LocalTime.MIDNIGHT.plusNanos(1)));
 		Assert.assertEquals(72, calculateTotalCharge(time(17, 00), time(17, 00), time(1, 00)));
+	}
+
+	@Test
+	public void testTotalChargeWithAllThreeChargeCategories() {
 		Assert.assertEquals(76, calculateTotalCharge(time(17, 00), time(17, 01), time(1, 00)));
 		Assert.assertEquals(100, calculateTotalCharge(time(19, 15), time(21, 30), time(2, 10)));
 		Assert.assertEquals(32, calculateTotalCharge(LocalTime.MIDNIGHT, LocalTime.MIDNIGHT, time(1, 15)));
