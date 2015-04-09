@@ -106,17 +106,13 @@ public class BabySitterChargeCalculator {
 	 * Fractional hours are rounded up to a whole hour.
 	 */
 	static int hoursAfterMidnight(LocalTime endTime) {
-		//every LocalTime is after midnight using LocalTime.isAfter, so we'll have to be clever
-		if (betweenInclusive(FIVE_PM, LocalTime.MAX, endTime) || endTime.equals(LocalTime.MIDNIGHT)) {
+		int hour = endTime.getHour();
+		if (hour > FOUR_AM.getHour()) {
 			return 0;
+		} else if (endTime.isAfter(LocalTime.of(hour, 00))) {
+			return hour + 1; //round up number of hours
 		} else {
-			long nanosPerHour = 60 * 60 * 1_000_000_000L;
-			int wholeHours = endTime.getHour();
-			if (endTime.toNanoOfDay() % nanosPerHour > 0) {
-				return 1 + wholeHours;
-			} else {
-				return wholeHours;
-			}
+			return hour;
 		}
 	}
 }
