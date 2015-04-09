@@ -66,7 +66,7 @@ public class BabySitterChargeCalculator {
 	 * @param endTime   the the when babysitting ends.
 	 * @return the total charge, in dollars, for the night of babysitting
 	 */
-	public static int calculateNightlyCharge(LocalTime startTime, LocalTime bedTime, LocalTime endTime) {
+	public static int calculateTotalCharge(LocalTime startTime, LocalTime bedTime, LocalTime endTime) {
 		checkArguments(startTime, bedTime, endTime);
 		int beforeBedTimeCharge = getChargeForBeforeBedTime(startTime, bedTime);
 		int afterBedTimeCharge = getChargeForAfterBedTime(startTime, bedTime, endTime);
