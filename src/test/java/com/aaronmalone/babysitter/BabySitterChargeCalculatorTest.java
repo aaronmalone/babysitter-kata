@@ -10,10 +10,6 @@ import static com.aaronmalone.babysitter.BabySitterChargeCalculator.*;
 @SuppressWarnings("OctalInteger") //so we can use "00" for minutes
 public class BabySitterChargeCalculatorTest {
 
-	/**
-	 * Test that an {@link java.lang.IllegalArgumentException} is thrown if an
-	 * invalid start time is used.
-	 */
 	@Test
 	public void testStartTimeNotBefore5PM() {
 		LocalTime[] invalidStartTimes = {time(3, 00), time(4, 00), time(5, 00), time(12, 00), time(16, 59)};
@@ -30,10 +26,6 @@ public class BabySitterChargeCalculatorTest {
 		}
 	}
 
-	/**
-	 * Test that an {@link java.lang.IllegalArgumentException} is thrown if
-	 * the bed time is before the start time.
-	 */
 	@Test
 	public void testThatBedTimeNotBeforeStartTime() {
 		LocalTime startTime = time(18, 00);
