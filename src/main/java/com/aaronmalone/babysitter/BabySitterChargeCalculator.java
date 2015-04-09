@@ -44,6 +44,9 @@ public class BabySitterChargeCalculator {
 	private static final LocalTime FIVE_PM = LocalTime.of(17, 00);
 	private static final LocalTime FOUR_AM = LocalTime.of(4, 00);
 
+	private static final long NANOS_PER_HOUR = 60 * 60 * 1_000_000_000L;
+	private static final long NANOS_PER_DAY = 24 * NANOS_PER_HOUR;
+
 	@VisibleForTesting
 	static final int AFTER_MIDNIGHT_RATE = 16;
 
@@ -86,7 +89,19 @@ public class BabySitterChargeCalculator {
 	 */
 	@VisibleForTesting
 	static boolean isEqualOrAfter(LocalTime time1, LocalTime time2) {
-		throw new UnsupportedOperationException();
+		return time1.equals(time2) || nanosAfter5pm(time1) > nanosAfter5pm(time2);
+	}
+
+	private static long nanosAfter5pm(LocalTime time) {
+		int hour = time.getHour();
+		Preconditions.checkArgument(hour <= 4 || hour >= 17, "Invalid babysitting time: %s", time);
+		final long nanos;
+		if (hour <= 4) {
+			nanos = NANOS_PER_DAY + time.toNanoOfDay();
+		} else { //hour >= 17
+			nanos = time.toNanoOfDay();
+		}
+		return nanos - FIVE_PM.toNanoOfDay();
 	}
 
 	private static boolean endTimeNotAfter4am(LocalTime endTime) {
