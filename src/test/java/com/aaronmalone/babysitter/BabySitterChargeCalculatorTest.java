@@ -197,17 +197,22 @@ public class BabySitterChargeCalculatorTest {
 	}
 
 	@Test
-	public void testTotalCharge() {
+	public void testTotalChargeWithNoPostBedtimeCharge() {
+		//all cases have no post-bedtime charge (nothing earned at the $8/rate)
 		Assert.assertEquals(148, calculateTotalCharge(time(17, 00), LocalTime.MIDNIGHT, time(4, 00)));
 		Assert.assertEquals(148, calculateTotalCharge(time(17, 59), LocalTime.MIDNIGHT, time(3, 01)));
 		Assert.assertEquals(148, calculateTotalCharge(time(17, 59), time(23, 01), time(3, 01)));
+		Assert.assertEquals(48, calculateTotalCharge(time(20, 00), time(23, 15), time(23, 45)));
+	}
+
+	@Test
+	public void testTotalCharge() {
 		Assert.assertEquals(56, calculateTotalCharge(time(17, 00), time(17, 00), LocalTime.MIDNIGHT));
 		Assert.assertEquals(72, calculateTotalCharge(time(17, 00), time(17, 00), LocalTime.MIDNIGHT.plusNanos(1)));
 		Assert.assertEquals(72, calculateTotalCharge(time(17, 00), time(17, 00), time(1, 00)));
 		Assert.assertEquals(76, calculateTotalCharge(time(17, 00), time(17, 01), time(1, 00)));
 		Assert.assertEquals(100, calculateTotalCharge(time(19, 15), time(21, 30), time(2, 10)));
 		Assert.assertEquals(32, calculateTotalCharge(LocalTime.MIDNIGHT, LocalTime.MIDNIGHT, time(1, 15)));
-		Assert.assertEquals(48, calculateTotalCharge(time(20, 00), time(23, 15), time(23, 45)));
 		Assert.assertEquals(44, calculateTotalCharge(time(20, 00), time(22, 15), time(23, 45)));
 	}
 
