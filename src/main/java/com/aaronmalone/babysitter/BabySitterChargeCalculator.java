@@ -169,4 +169,13 @@ public class BabySitterChargeCalculator {
 			return hour;
 		}
 	}
+
+	/**
+	 * Returns the charge, in dollars, for hours worked after midnight.
+	 * Fractional hours are rounded up.
+	 */
+	@VisibleForTesting
+	static int getChargeForAfterMidnight(LocalTime endTime) {
+		return Integer.MIN_VALUE;
+	}
 }
