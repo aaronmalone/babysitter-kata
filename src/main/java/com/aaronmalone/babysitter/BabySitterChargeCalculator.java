@@ -133,6 +133,12 @@ public class BabySitterChargeCalculator {
 	 */
 	@VisibleForTesting
 	static int hoursPreBedTime(LocalTime startTime, LocalTime bedTime) {
-		return Integer.MIN_VALUE;
+		int startHour = startTime.getHour();
+		int bedHour = bedTime.getHour();
+		if (bedTime.isAfter(LocalTime.of(bedHour, 00))) {
+			return bedHour - startHour + 1;
+		} else {
+			return bedHour - startHour;
+		}
 	}
 }
