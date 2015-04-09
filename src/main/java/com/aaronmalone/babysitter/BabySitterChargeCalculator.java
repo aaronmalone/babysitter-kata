@@ -81,6 +81,14 @@ public class BabySitterChargeCalculator {
 		Preconditions.checkArgument(endTimeNotBeforeBedTime(bedTime, endTime), "End time is before bed time.");
 	}
 
+	/**
+	 * Tests whether the first {@link LocalTime} is equal to, or after, the second.
+	 */
+	@VisibleForTesting
+	static boolean isEqualOrAfter(LocalTime time1, LocalTime time2) {
+		throw new UnsupportedOperationException();
+	}
+
 	private static boolean endTimeNotAfter4am(LocalTime endTime) {
 		return betweenInclusive(LocalTime.MIDNIGHT, FOUR_AM, endTime)
 				|| betweenInclusive(FIVE_PM, LocalTime.MAX, endTime);
