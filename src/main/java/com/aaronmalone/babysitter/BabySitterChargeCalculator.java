@@ -101,6 +101,10 @@ public class BabySitterChargeCalculator {
 		return between || timeToCheck.equals(begin) || timeToCheck.equals(end);
 	}
 
+	/**
+	 * Returns the number of hours worked before midnight, based on the start time.
+	 * Fractional hours are rounded up to a whole hour.
+	 */
 	@VisibleForTesting
 	static int hoursBeforeMidnight(LocalTime startTime) {
 		int hour = startTime.getHour();
