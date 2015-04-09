@@ -66,7 +66,10 @@ public class BabySitterChargeCalculator {
 	 */
 	public static int calculateNightlyCharge(LocalTime startTime, LocalTime bedTime, LocalTime endTime) {
 		checkArguments(startTime, bedTime, endTime);
-		return Integer.MIN_VALUE;
+		int beforeBedTimeCharge = getChargeForBeforeBedTime(startTime, bedTime);
+		int afterBedTimeCharge = getChargeForAfterBedTime(startTime, bedTime, endTime);
+		int afterMidnightCharge = getChargeForAfterMidnight(endTime);
+		return beforeBedTimeCharge + afterBedTimeCharge + afterMidnightCharge;
 	}
 
 	@VisibleForTesting
