@@ -181,4 +181,9 @@ public class BabySitterChargeCalculator {
 		int hours = hoursAfterMidnight(endTime);
 		return hours * AFTER_MIDNIGHT_RATE;
 	}
+
+	@VisibleForTesting
+	static int getChargeForBeforeBedTime(LocalTime startTime, LocalTime bedTime) {
+		return Integer.MIN_VALUE;
+	}
 }
