@@ -128,14 +128,19 @@ public class BabySitterChargeCalculatorTest {
 	}
 
 	@Test
-	public void testHoursAfterMidnight() {
-		//note: I imported BabySitterChargeCalculator.hoursAfterMidnight to save horizontal space here
+	public void testHoursAfterMidnightMethodWithTimesNotAfterMidnight() {
+		//note: static import BabySitterChargeCalculator.hoursAfterMidnight
 		LocalTime[] timesBeforeMidnight = {LocalTime.MAX, time(23, 00), time(17, 00)};
 		for (LocalTime endTime : timesBeforeMidnight) {
 			Assert.assertEquals(0, hoursAfterMidnight(endTime));
 		}
 		Assert.assertEquals(0, hoursAfterMidnight(LocalTime.MIDNIGHT));
-		Assert.assertEquals(0, hoursAfterMidnight(LocalTime.MIDNIGHT.plusNanos(1)));
+	}
+
+	@Test
+	public void testHoursAfterMidnight() {
+		//note: static import BabySitterChargeCalculator.hoursAfterMidnight
+		Assert.assertEquals(1, hoursAfterMidnight(LocalTime.MIDNIGHT.plusNanos(1)));
 		Assert.assertEquals(1, hoursAfterMidnight(time(1, 00).minusNanos(1)));
 		Assert.assertEquals(1, hoursAfterMidnight(time(1, 00)));
 		Assert.assertEquals(2, hoursAfterMidnight(time(1, 00).plusNanos(1)));
