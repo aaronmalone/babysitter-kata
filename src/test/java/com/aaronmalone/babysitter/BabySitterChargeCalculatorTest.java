@@ -171,6 +171,11 @@ public class BabySitterChargeCalculatorTest {
 		Assert.assertEquals(1, hoursPreBedTime(time(17, 00), time(18, 00)));
 		Assert.assertEquals(2, hoursPreBedTime(time(17, 00), time(18, 10)));
 		Assert.assertEquals(2, hoursPreBedTime(time(17, 59), time(18, 10)));
+
+		//midnight cases
+		Assert.assertEquals(0, hoursPreBedTime(LocalTime.MIDNIGHT, LocalTime.MIDNIGHT));
+		Assert.assertEquals(1, hoursPreBedTime(LocalTime.MAX, LocalTime.MIDNIGHT));
+		Assert.assertEquals(4, hoursPreBedTime(time(20, 00), LocalTime.MIDNIGHT));
 	}
 
 	/**
