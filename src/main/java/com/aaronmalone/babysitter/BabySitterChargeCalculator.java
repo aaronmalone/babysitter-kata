@@ -117,7 +117,7 @@ public class BabySitterChargeCalculator {
 
 	private static boolean bedTimeNotAfterMidnight(LocalTime bedTime) {
 		return bedTime.equals(LocalTime.MIDNIGHT)
-				|| betweenInclusive(FIVE_PM, LocalTime.MAX, bedTime);
+				|| bedTime.getHour() >= 17;
 	}
 
 	private static boolean bedTimeNotBeforeStartTime(LocalTime startTime, LocalTime bedTime) {
