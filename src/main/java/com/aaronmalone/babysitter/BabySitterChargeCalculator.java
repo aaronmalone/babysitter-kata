@@ -194,6 +194,6 @@ public class BabySitterChargeCalculator {
 
 	@VisibleForTesting
 	static int getChargeForAfterBedTime(LocalTime startTime, LocalTime bedTime, LocalTime endTime) {
-		return Integer.MIN_VALUE;
+		return 0;
 	}
 }
