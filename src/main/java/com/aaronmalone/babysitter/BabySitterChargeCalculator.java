@@ -197,6 +197,12 @@ public class BabySitterChargeCalculator {
 		return hours * AFTER_MIDNIGHT_RATE;
 	}
 
+	/**
+	 * Returns the charge, in dollars, for hours worked before bedtime.
+	 * Fractional hours are rounded up. If a both pre- and post-bedtime
+	 * babysitting occur in the same hour, the hour is counted as
+	 * before bedtime.
+	 */
 	@VisibleForTesting
 	static int getChargeForBeforeBedTime(LocalTime startTime, LocalTime bedTime) {
 		int hours = hoursPreBedTime(startTime, bedTime);
