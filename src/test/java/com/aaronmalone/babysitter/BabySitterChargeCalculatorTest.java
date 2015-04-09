@@ -25,6 +25,7 @@ public class BabySitterChargeCalculatorTest {
 				Assert.fail();
 			} catch (IllegalArgumentException e) {
 				// we expected this
+				Assert.assertTrue(e.getMessage().contains("Start time is before 5pm: "));
 			}
 		}
 	}
