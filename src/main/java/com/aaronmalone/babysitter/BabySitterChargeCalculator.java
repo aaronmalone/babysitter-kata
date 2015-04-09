@@ -145,7 +145,14 @@ public class BabySitterChargeCalculator {
 
 	@VisibleForTesting
 	static int hoursPostBedTime(LocalTime startTime, LocalTime bedTime, LocalTime endTime) {
-		return Integer.MIN_VALUE;
+		if (betweenInclusive(LocalTime.MIDNIGHT, FOUR_AM, endTime)) {
+			return hoursBeforeMidnight(startTime) - hoursPreBedTime(startTime, bedTime);
+		} else {
+			int endHour = getHourRoundUp(endTime);
+			int startHour = startTime.getHour();
+			int totalHours = endHour - startHour;
+			return totalHours - hoursPreBedTime(startTime, bedTime);
+		}
 	}
 
 	/**
