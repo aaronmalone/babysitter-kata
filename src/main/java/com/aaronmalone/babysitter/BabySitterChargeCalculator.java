@@ -146,6 +146,8 @@ public class BabySitterChargeCalculator {
 	/**
 	 * Returns the hour of the {@link LocalTime}, rounded up if the time has
 	 * passed the exactly n-o'clock.
+	 * <p>
+	 * For example, <code>getHourRoundUp(LocalTime.of(4, 15)) == 5</code>
 	 */
 	private static int getHourRoundUp(LocalTime t) {
 		int hour = t.getHour();
