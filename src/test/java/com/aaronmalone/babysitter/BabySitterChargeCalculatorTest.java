@@ -214,6 +214,11 @@ public class BabySitterChargeCalculatorTest {
 		Assert.assertEquals(0, getChargeForBeforeBedTime(time(17, 00), time(17, 00)));
 		Assert.assertEquals(0, getChargeForBeforeBedTime(time(21, 00), time(21, 00)));
 		Assert.assertEquals(0, getChargeForBeforeBedTime(LocalTime.MIDNIGHT, LocalTime.MIDNIGHT));
+		Assert.assertEquals(BEFORE_BEDTIME_RATE, getChargeForBeforeBedTime(time(17, 00), time(17, 00).plusNanos(1)));
+		Assert.assertEquals(BEFORE_BEDTIME_RATE, getChargeForBeforeBedTime(time(17, 00), time(18, 00)));
+		Assert.assertEquals(2 * BEFORE_BEDTIME_RATE, getChargeForBeforeBedTime(time(17, 00), time(18, 01)));
+		Assert.assertEquals(3 * BEFORE_BEDTIME_RATE, getChargeForBeforeBedTime(time(17, 00), time(19, 01)));
+		Assert.assertEquals(4 * BEFORE_BEDTIME_RATE, getChargeForBeforeBedTime(time(20, 30), LocalTime.MIDNIGHT));
 	}
 
 	/**

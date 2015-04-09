@@ -44,7 +44,11 @@ public class BabySitterChargeCalculator {
 	private static final LocalTime FIVE_PM = LocalTime.of(17, 00);
 	private static final LocalTime FOUR_AM = LocalTime.of(4, 00);
 
+	@VisibleForTesting
 	static final int AFTER_MIDNIGHT_RATE = 16;
+	@VisibleForTesting
+	static final int BEFORE_BEDTIME_RATE = 12;
+
 
 	/**
 	 * Calculate the charge for a night of babysitting.
