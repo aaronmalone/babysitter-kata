@@ -47,6 +47,9 @@ public class BabySitterChargeCalculatorTest {
 		}
 		LocalTime earlierStartTime = time(17, 10);
 		BabySitterChargeCalculator.checkArguments(earlierStartTime, invalidBedTime, endTime);
+
+		//test case where bed time is midnight
+		BabySitterChargeCalculator.checkArguments(time(17,00), LocalTime.MIDNIGHT, time(1, 00));
 	}
 
 	@Test
