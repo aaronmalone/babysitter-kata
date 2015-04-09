@@ -89,18 +89,6 @@ public class BabySitterChargeCalculator {
 		return hour >= 17 || hour == 0;
 	}
 
-	private static long nanosAfter5pm(LocalTime time) {
-		int hour = time.getHour();
-		Preconditions.checkArgument(hour <= 4 || hour >= 17, "Invalid babysitting time: %s", time);
-		final long nanos;
-		if (hour <= 4) {
-			nanos = NANOS_PER_DAY + time.toNanoOfDay();
-		} else { //hour >= 17
-			nanos = time.toNanoOfDay();
-		}
-		return nanos - FIVE_PM.toNanoOfDay();
-	}
-
 	private static boolean endTimeNotAfter4am(LocalTime endTime) {
 		return !endTime.isAfter(FOUR_AM)
 				|| endTime.getHour() >= 17;
