@@ -89,7 +89,7 @@ public class BabySitterChargeCalculator {
 	 */
 	@VisibleForTesting
 	static boolean isEqualOrAfter(LocalTime time1, LocalTime time2) {
-		return time1.equals(time2) || nanosAfter5pm(time1) > nanosAfter5pm(time2);
+		return nanosAfter5pm(time1) >= nanosAfter5pm(time2);
 	}
 
 	private static long nanosAfter5pm(LocalTime time) {
