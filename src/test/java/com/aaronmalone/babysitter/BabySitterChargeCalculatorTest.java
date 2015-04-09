@@ -209,7 +209,7 @@ public class BabySitterChargeCalculatorTest {
 	}
 
 	/**
-	 * A really short way to get a {@link LocalTime}.
+	 * A convenient method for creating a {@link LocalTime}.
 	 * Based on a 24-hour day (e.g. 16 hours is 4pm)
 	 */
 	private static LocalTime time(int hour, int minute) {
