@@ -110,8 +110,9 @@ public class BabySitterChargeCalculator {
 	}
 
 	private static boolean endTimeNotAfter4am(LocalTime endTime) {
-		return betweenInclusive(LocalTime.MIDNIGHT, FOUR_AM, endTime)
-				|| betweenInclusive(FIVE_PM, LocalTime.MAX, endTime);
+		return !endTime.isAfter(FOUR_AM)
+				|| endTime.getHour() >= 17;
+
 	}
 
 	private static boolean bedTimeNotAfterMidnight(LocalTime bedTime) {
