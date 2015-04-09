@@ -207,7 +207,6 @@ public class BabySitterChargeCalculatorTest {
 		Assert.assertEquals(2 * AFTER_MIDNIGHT_RATE, getChargeForAfterMidnight(time(2, 00)));
 		Assert.assertEquals(4 * AFTER_MIDNIGHT_RATE, getChargeForAfterMidnight(time(4, 00).minusNanos(1)));
 		Assert.assertEquals(4 * AFTER_MIDNIGHT_RATE, getChargeForAfterMidnight(time(4, 00)));
-
 	}
 
 	/**

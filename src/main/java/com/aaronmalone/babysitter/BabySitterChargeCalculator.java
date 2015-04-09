@@ -178,6 +178,7 @@ public class BabySitterChargeCalculator {
 	 */
 	@VisibleForTesting
 	static int getChargeForAfterMidnight(LocalTime endTime) {
-		return 0;
+		int hours = hoursAfterMidnight(endTime);
+		return hours * AFTER_MIDNIGHT_RATE;
 	}
 }
