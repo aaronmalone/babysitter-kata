@@ -201,6 +201,7 @@ public class BabySitterChargeCalculatorTest {
 		//all cases have no post-bedtime charge (nothing earned at the $8/rate)
 		Assert.assertEquals(148, calculateTotalCharge(time(17, 00), LocalTime.MIDNIGHT, time(4, 00)));
 		Assert.assertEquals(148, calculateTotalCharge(time(17, 59), LocalTime.MIDNIGHT, time(3, 01)));
+		Assert.assertEquals(84, calculateTotalCharge(time(17, 59), LocalTime.MIDNIGHT, LocalTime.MIDNIGHT));
 		Assert.assertEquals(148, calculateTotalCharge(time(17, 59), time(23, 01), time(3, 01)));
 		Assert.assertEquals(48, calculateTotalCharge(time(20, 00), time(23, 15), time(23, 45)));
 	}
