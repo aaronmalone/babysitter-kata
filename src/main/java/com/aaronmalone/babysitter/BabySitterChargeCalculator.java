@@ -143,6 +143,11 @@ public class BabySitterChargeCalculator {
 		}
 	}
 
+	@VisibleForTesting
+	static int hoursPostBedTime(LocalTime startTime, LocalTime bedTime, LocalTime endTime) {
+		return Integer.MIN_VALUE;
+	}
+
 	/**
 	 * Returns the hour of the {@link LocalTime}, rounded up if the time has
 	 * passed the exactly n-o'clock.
