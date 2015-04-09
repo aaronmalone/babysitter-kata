@@ -41,7 +41,6 @@ import java.time.LocalTime;
 @SuppressWarnings("OctalInteger") //so we can use "00" for minutes
 public class BabySitterChargeCalculator {
 
-	private static final LocalTime FIVE_PM = LocalTime.of(17, 00);
 	private static final LocalTime FOUR_AM = LocalTime.of(4, 00);
 
 	private static final long NANOS_PER_HOUR = 60 * 60 * 1_000_000_000L;
@@ -55,6 +54,8 @@ public class BabySitterChargeCalculator {
 
 	@VisibleForTesting
 	static final int AFTER_BEDTIME_RATE = 8;
+
+	private static final int HOUR_OF_5_PM = 17;
 
 
 	/**
@@ -86,18 +87,18 @@ public class BabySitterChargeCalculator {
 
 	private static boolean startTimeNotBefore5pm(LocalTime startTime) {
 		int hour = startTime.getHour();
-		return hour >= 17 || hour == 0;
+		return hour >= HOUR_OF_5_PM || hour == 0;
 	}
 
 	private static boolean endTimeNotAfter4am(LocalTime endTime) {
 		return !endTime.isAfter(FOUR_AM)
-				|| endTime.getHour() >= 17;
+				|| endTime.getHour() >= HOUR_OF_5_PM;
 
 	}
 
 	private static boolean bedTimeNotAfterMidnight(LocalTime bedTime) {
 		return bedTime.equals(LocalTime.MIDNIGHT)
-				|| bedTime.getHour() >= 17;
+				|| bedTime.getHour() >= HOUR_OF_5_PM;
 	}
 
 	private static boolean bedTimeNotBeforeStartTime(LocalTime startTime, LocalTime bedTime) {
