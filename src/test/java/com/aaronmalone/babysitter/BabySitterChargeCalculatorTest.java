@@ -142,10 +142,11 @@ public class BabySitterChargeCalculatorTest {
 	public void testHoursBeforeMidnight() {
 		//note: static import BabySitterChargeCalculator.hoursBeforeMidnight
 		Assert.assertEquals(0, hoursBeforeMidnight(LocalTime.MIDNIGHT));
-		Assert.assertEquals(1, hoursBeforeMidnight(time(11, 59)));
+		Assert.assertEquals(1, hoursBeforeMidnight(time(23, 59)));
 		Assert.assertEquals(1, hoursBeforeMidnight(LocalTime.MAX));
 		Assert.assertEquals(4, hoursBeforeMidnight(time(20, 00)));
 		Assert.assertEquals(5, hoursBeforeMidnight(time(19, 59)));
+		Assert.assertEquals(12, hoursBeforeMidnight(LocalTime.NOON));
 	}
 
 	@Test

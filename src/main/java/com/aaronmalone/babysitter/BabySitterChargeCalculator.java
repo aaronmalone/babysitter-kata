@@ -103,7 +103,8 @@ public class BabySitterChargeCalculator {
 
 	@VisibleForTesting
 	static int hoursBeforeMidnight(LocalTime startTime) {
-		return Integer.MIN_VALUE;
+		int hour = startTime.getHour();
+		return hour == 0 ? 0 : 24 - hour;
 	}
 
 	/**
