@@ -52,6 +52,7 @@ public class BabySitterChargeCalculator {
 	@VisibleForTesting
 	static final int AFTER_BEDTIME_RATE = 8;
 
+	private static final int HOUR_OF_MIDNIGHT = 0;
 	private static final int HOUR_OF_5_PM = 17;
 
 	/**
@@ -83,7 +84,7 @@ public class BabySitterChargeCalculator {
 
 	private static boolean startTimeNotBefore5pm(LocalTime startTime) {
 		int hour = startTime.getHour();
-		return hour >= HOUR_OF_5_PM || hour == 0;
+		return hour >= HOUR_OF_5_PM || hour == HOUR_OF_MIDNIGHT;
 	}
 
 	private static boolean endTimeNotAfter4am(LocalTime endTime) {
@@ -114,7 +115,7 @@ public class BabySitterChargeCalculator {
 	@VisibleForTesting
 	static int hoursBeforeMidnight(LocalTime startTime) {
 		int hour = startTime.getHour();
-		return hour == 0 ? 0 : 24 - hour;
+		return hour == HOUR_OF_MIDNIGHT ? 0 : 24 - hour;
 	}
 
 	/**
