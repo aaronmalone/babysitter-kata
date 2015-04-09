@@ -49,7 +49,7 @@ public class BabySitterChargeCalculatorTest {
 		BabySitterChargeCalculator.checkArguments(earlierStartTime, invalidBedTime, endTime);
 
 		//test case where bed time is midnight
-		BabySitterChargeCalculator.checkArguments(time(17,00), LocalTime.MIDNIGHT, time(1, 00));
+		BabySitterChargeCalculator.checkArguments(time(17, 00), LocalTime.MIDNIGHT, time(1, 00));
 	}
 
 	@Test
@@ -240,9 +240,9 @@ public class BabySitterChargeCalculatorTest {
 		Assert.assertEquals(148, calculateNightlyCharge(time(17, 00), LocalTime.MIDNIGHT, time(4, 00)));
 		Assert.assertEquals(148, calculateNightlyCharge(time(17, 59), LocalTime.MIDNIGHT, time(3, 01)));
 		Assert.assertEquals(148, calculateNightlyCharge(time(17, 59), time(23, 01), time(3, 01)));
-		Assert.assertEquals(56, calculateNightlyCharge(time(17, 00), time(17,00), LocalTime.MIDNIGHT));
-		Assert.assertEquals(72, calculateNightlyCharge(time(17, 00), time(17,00), LocalTime.MIDNIGHT.plusNanos(1)));
-		Assert.assertEquals(72, calculateNightlyCharge(time(17, 00), time(17,00), time(1, 00)));
+		Assert.assertEquals(56, calculateNightlyCharge(time(17, 00), time(17, 00), LocalTime.MIDNIGHT));
+		Assert.assertEquals(72, calculateNightlyCharge(time(17, 00), time(17, 00), LocalTime.MIDNIGHT.plusNanos(1)));
+		Assert.assertEquals(72, calculateNightlyCharge(time(17, 00), time(17, 00), time(1, 00)));
 		Assert.assertEquals(76, calculateNightlyCharge(time(17, 00), time(17, 01), time(1, 00)));
 		Assert.assertEquals(100, calculateNightlyCharge(time(19, 15), time(21, 30), time(2, 10)));
 	}
