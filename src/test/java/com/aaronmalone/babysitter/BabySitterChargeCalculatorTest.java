@@ -99,38 +99,6 @@ public class BabySitterChargeCalculatorTest {
 	}
 
 	@Test
-	public void testBetweenInclusive() {
-		//test between midnight and 4am
-		expectBetweenInclusiveReturnsTrue(LocalTime.MIDNIGHT, time(4, 00), LocalTime.MIDNIGHT);
-		expectBetweenInclusiveReturnsTrue(LocalTime.MIDNIGHT, time(4, 00), time(4, 00));
-		expectBetweenInclusiveReturnsTrue(LocalTime.MIDNIGHT, time(4, 00), time(0, 30));
-		expectBetweenInclusiveReturnsTrue(LocalTime.MIDNIGHT, time(4, 00), time(3, 30));
-		expectBetweenInclusiveReturnsFalse(LocalTime.MIDNIGHT, time(4, 00), time(4, 10));
-		expectBetweenInclusiveReturnsFalse(LocalTime.MIDNIGHT, time(4, 00), time(5, 30));
-		expectBetweenInclusiveReturnsFalse(LocalTime.MIDNIGHT, time(4, 00), time(23, 00));
-
-		//test between 5pm and LocalTime.MAX
-		expectBetweenInclusiveReturnsTrue(time(17, 00), LocalTime.MAX, time(17, 00));
-		expectBetweenInclusiveReturnsTrue(time(17, 00), LocalTime.MAX, LocalTime.MAX);
-		expectBetweenInclusiveReturnsTrue(time(17, 00), LocalTime.MAX, time(22, 30));
-		expectBetweenInclusiveReturnsFalse(time(17, 00), LocalTime.MAX, LocalTime.MIDNIGHT);
-		expectBetweenInclusiveReturnsFalse(time(17, 00), LocalTime.MAX, LocalTime.NOON);
-		expectBetweenInclusiveReturnsFalse(time(17, 00), LocalTime.MAX, time(0, 30));
-		expectBetweenInclusiveReturnsFalse(time(17, 00), LocalTime.MAX, time(4, 00));
-		expectBetweenInclusiveReturnsFalse(time(17, 00), LocalTime.MAX, time(16, 00));
-	}
-
-	private void expectBetweenInclusiveReturnsTrue(LocalTime begin, LocalTime end, LocalTime timeToTest) {
-		boolean returnValue = BabySitterChargeCalculator.betweenInclusive(begin, end, timeToTest);
-		Assert.assertTrue(returnValue);
-	}
-
-	private void expectBetweenInclusiveReturnsFalse(LocalTime begin, LocalTime end, LocalTime timeToTest) {
-		boolean returnValue = BabySitterChargeCalculator.betweenInclusive(begin, end, timeToTest);
-		Assert.assertTrue(!returnValue);
-	}
-
-	@Test
 	public void testHoursAfterMidnightMethodWithTimesNotAfterMidnight() {
 		//note: static import of method to save space
 		LocalTime[] timesBeforeMidnight = {LocalTime.MAX, time(23, 00), time(17, 00)};

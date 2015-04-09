@@ -131,23 +131,6 @@ public class BabySitterChargeCalculator {
 	}
 
 	/**
-	 * Checks that a {@link LocalTime} is between two times.
-	 *
-	 * @param begin       the beginning of the time period, inclusive
-	 * @param end         the end of the time period, inclusive
-	 * @param timeToCheck the time to check
-	 * @return true if the time is between the two times or equal to one of them
-	 * @throws java.lang.IllegalArgumentException if the endTime is before the
-	 *                                            start time using {@link LocalTime#isBefore(LocalTime)}
-	 */
-	@VisibleForTesting
-	static boolean betweenInclusive(LocalTime begin, LocalTime end, LocalTime timeToCheck) {
-		Preconditions.checkArgument(!end.isBefore(begin), "End time (%s) is before begin time (%s).", end, begin);
-		boolean between = timeToCheck.isAfter(begin) && timeToCheck.isBefore(end);
-		return between || timeToCheck.equals(begin) || timeToCheck.equals(end);
-	}
-
-	/**
 	 * Returns the number of hours worked before midnight, based on the start time.
 	 * Fractional hours are rounded up to a whole hour.
 	 */
