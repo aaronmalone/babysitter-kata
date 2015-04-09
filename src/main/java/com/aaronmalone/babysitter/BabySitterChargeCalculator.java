@@ -119,11 +119,10 @@ public class BabySitterChargeCalculator {
 	static int hoursAfterMidnight(LocalTime endTime) {
 		int hour = endTime.getHour();
 		if (hour > FOUR_AM.getHour()) {
+			//actually, in this scenario, before midnight
 			return 0;
-		} else if (endTime.isAfter(LocalTime.of(hour, 00))) {
-			return hour + 1; //round up number of hours
 		} else {
-			return hour;
+			return getHourRoundUp(endTime);
 		}
 	}
 
