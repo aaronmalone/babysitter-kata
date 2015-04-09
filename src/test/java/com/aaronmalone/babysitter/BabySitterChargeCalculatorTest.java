@@ -223,6 +223,12 @@ public class BabySitterChargeCalculatorTest {
 		assertEquals(44, calculateTotalCharge(time(20, 00), time(22, 15), time(23, 45)));
 	}
 
+	@Test
+	public void testTotalChargesWithZeroOverallCharge() {
+		assertEquals(0, calculateTotalCharge(time(17, 00), time(17, 00), time(17, 00)));
+		assertEquals(0, calculateTotalCharge(LocalTime.MIDNIGHT, LocalTime.MIDNIGHT, LocalTime.MIDNIGHT));
+	}
+
 	/**
 	 * A convenient method for creating a {@link LocalTime}.
 	 * Based on a 24-hour day (e.g. 16 hours is 4pm)
