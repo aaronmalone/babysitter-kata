@@ -209,6 +209,13 @@ public class BabySitterChargeCalculatorTest {
 		Assert.assertEquals(4 * AFTER_MIDNIGHT_RATE, getChargeForAfterMidnight(time(4, 00)));
 	}
 
+	@Test
+	public void testChargeForBeforeBedTime() {
+		Assert.assertEquals(0, getChargeForBeforeBedTime(time(17, 00), time(17, 00)));
+		Assert.assertEquals(0, getChargeForBeforeBedTime(time(21, 00), time(21, 00)));
+		Assert.assertEquals(0, getChargeForBeforeBedTime(LocalTime.MIDNIGHT, LocalTime.MIDNIGHT));
+	}
+
 	/**
 	 * A really short way to get a {@link LocalTime}.
 	 * Based on a 24-hour day (e.g. 16 hours is 4pm)
