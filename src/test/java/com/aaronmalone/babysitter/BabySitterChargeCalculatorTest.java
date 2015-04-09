@@ -200,6 +200,14 @@ public class BabySitterChargeCalculatorTest {
 			Assert.assertEquals(0, getChargeForAfterMidnight(endTime));
 		}
 		Assert.assertEquals(0, getChargeForAfterMidnight(LocalTime.MIDNIGHT));
+		Assert.assertEquals(AFTER_MIDNIGHT_RATE, getChargeForAfterMidnight(LocalTime.MIDNIGHT.plusNanos(1)));
+		Assert.assertEquals(AFTER_MIDNIGHT_RATE, getChargeForAfterMidnight(time(0, 59)));
+		Assert.assertEquals(AFTER_MIDNIGHT_RATE, getChargeForAfterMidnight(time(1, 00)));
+		Assert.assertEquals(2 * AFTER_MIDNIGHT_RATE, getChargeForAfterMidnight(time(1, 15)));
+		Assert.assertEquals(2 * AFTER_MIDNIGHT_RATE, getChargeForAfterMidnight(time(2, 00)));
+		Assert.assertEquals(4 * AFTER_MIDNIGHT_RATE, getChargeForAfterMidnight(time(4, 00).minusNanos(1)));
+		Assert.assertEquals(4 * AFTER_MIDNIGHT_RATE, getChargeForAfterMidnight(time(4, 00)));
+
 	}
 
 	/**
