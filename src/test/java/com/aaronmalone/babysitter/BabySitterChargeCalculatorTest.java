@@ -5,6 +5,8 @@ import org.junit.Test;
 
 import java.time.LocalTime;
 
+import static com.aaronmalone.babysitter.BabySitterChargeCalculator.hoursAfterMidnight;
+
 @SuppressWarnings("OctalInteger") //so we can use "00" for minutes
 public class BabySitterChargeCalculatorTest {
 
@@ -123,6 +125,25 @@ public class BabySitterChargeCalculatorTest {
 	private void expectBetweenInclusiveReturnsFalse(LocalTime begin, LocalTime end, LocalTime timeToTest) {
 		boolean returnValue = BabySitterChargeCalculator.betweenInclusive(begin, end, timeToTest);
 		Assert.assertTrue(!returnValue);
+	}
+
+	@Test
+	public void testHoursAfterMidnight() {
+		//note: I imported BabySitterChargeCalculator.hoursAfterMidnight to save horizontal space here
+		LocalTime[] timesBeforeMidnight = {LocalTime.MAX, time(23, 00), time(17, 00)};
+		for (LocalTime endTime : timesBeforeMidnight) {
+			Assert.assertEquals(0, hoursAfterMidnight(endTime));
+		}
+		Assert.assertEquals(0, hoursAfterMidnight(LocalTime.MIDNIGHT));
+		Assert.assertEquals(0, hoursAfterMidnight(LocalTime.MIDNIGHT.plusNanos(1)));
+		Assert.assertEquals(1, hoursAfterMidnight(time(1, 00).minusNanos(1)));
+		Assert.assertEquals(1, hoursAfterMidnight(time(1, 00)));
+		Assert.assertEquals(2, hoursAfterMidnight(time(1, 00).plusNanos(1)));
+		Assert.assertEquals(2, hoursAfterMidnight(time(2, 00).minusNanos(1)));
+		Assert.assertEquals(3, hoursAfterMidnight(time(2, 00).plusNanos(1)));
+		Assert.assertEquals(3, hoursAfterMidnight(time(3, 00)));
+		Assert.assertEquals(4, hoursAfterMidnight(time(3, 00).plusNanos(1)));
+		Assert.assertEquals(4, hoursAfterMidnight(time(4, 00)));
 	}
 
 	/**
