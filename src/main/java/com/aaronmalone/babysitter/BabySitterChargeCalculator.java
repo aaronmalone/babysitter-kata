@@ -152,6 +152,14 @@ public class BabySitterChargeCalculator {
 		}
 	}
 
+	/**
+	 * Returns the number of hours that will be used to factor the
+	 * charge between bed time and either midnight or the end time,
+	 * whichever is earlier.
+	 *
+	 * Note that if both pre- and post-bedtime babysitting occurs in
+	 * the same hour, the hour will be counted toward pre-bedtime.
+	 */
 	@VisibleForTesting
 	static int hoursPostBedTime(LocalTime startTime, LocalTime bedTime, LocalTime endTime) {
 		if (endTime.getHour() <= HOUR_OF_4_AM) {
