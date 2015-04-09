@@ -237,7 +237,9 @@ public class BabySitterChargeCalculatorTest {
 
 	@Test
 	public void testTotalCharge() {
-		Assert.assertEquals(7 * 12 + 16 * 4, calculateNightlyCharge(time(17, 00), LocalTime.MIDNIGHT, time(4, 00)));
+		Assert.assertEquals(148, calculateNightlyCharge(time(17, 00), LocalTime.MIDNIGHT, time(4, 00)));
+		Assert.assertEquals(148, calculateNightlyCharge(time(17, 59), LocalTime.MIDNIGHT, time(3, 01)));
+		Assert.assertEquals(148, calculateNightlyCharge(time(17, 59), time(23, 01), time(3, 01)));
 	}
 
 	/**
