@@ -53,6 +53,7 @@ public class BabySitterChargeCalculator {
 	static final int AFTER_BEDTIME_RATE = 8;
 
 	private static final int HOUR_OF_MIDNIGHT = 0;
+	private static final int HOUR_OF_4_AM = 4;
 	private static final int HOUR_OF_5_PM = 17;
 
 	/**
@@ -75,36 +76,36 @@ public class BabySitterChargeCalculator {
 
 	@VisibleForTesting
 	static void checkArguments(LocalTime startTime, LocalTime bedTime, LocalTime endTime) {
-		Preconditions.checkArgument(startTimeNotBefore5pm(startTime), "Start time is before 5pm: %s", startTime);
-		Preconditions.checkArgument(endTimeNotAfter4am(endTime), "End time is after 4am: %s", endTime);
-		Preconditions.checkArgument(bedTimeNotAfterMidnight(bedTime), "Bed time is after midnight: %s", bedTime);
-		Preconditions.checkArgument(bedTimeNotBeforeStartTime(startTime, bedTime), "Bed time is before start time.");
-		Preconditions.checkArgument(endTimeNotBeforeBedTime(bedTime, endTime), "End time is before bed time.");
+		Preconditions.checkArgument(isStartTimeNotBefore5pm(startTime), "Start time is before 5pm: %s", startTime);
+		Preconditions.checkArgument(isEndTimeNotAfter4am(endTime), "End time is after 4am: %s", endTime);
+		Preconditions.checkArgument(isBedTimeNotAfterMidnight(bedTime), "Bed time is after midnight: %s", bedTime);
+		Preconditions.checkArgument(isBedTimeNotBeforeStartTime(startTime, bedTime), "Bed time is before start time.");
+		Preconditions.checkArgument(isEndTimeNotBeforeBedTime(bedTime, endTime), "End time is before bed time.");
 	}
 
-	private static boolean startTimeNotBefore5pm(LocalTime startTime) {
+	private static boolean isStartTimeNotBefore5pm(LocalTime startTime) {
 		int hour = startTime.getHour();
 		return hour >= HOUR_OF_5_PM || hour == HOUR_OF_MIDNIGHT;
 	}
 
-	private static boolean endTimeNotAfter4am(LocalTime endTime) {
+	private static boolean isEndTimeNotAfter4am(LocalTime endTime) {
 		return !endTime.isAfter(FOUR_AM)
 				|| endTime.getHour() >= HOUR_OF_5_PM;
 
 	}
 
-	private static boolean bedTimeNotAfterMidnight(LocalTime bedTime) {
+	private static boolean isBedTimeNotAfterMidnight(LocalTime bedTime) {
 		return bedTime.equals(LocalTime.MIDNIGHT)
 				|| bedTime.getHour() >= HOUR_OF_5_PM;
 	}
 
-	private static boolean bedTimeNotBeforeStartTime(LocalTime startTime, LocalTime bedTime) {
+	private static boolean isBedTimeNotBeforeStartTime(LocalTime startTime, LocalTime bedTime) {
 		return bedTime.equals(LocalTime.MIDNIGHT) || !startTime.isAfter(bedTime);
 	}
 
-	private static boolean endTimeNotBeforeBedTime(LocalTime bedTime, LocalTime endTime) {
+	private static boolean isEndTimeNotBeforeBedTime(LocalTime bedTime, LocalTime endTime) {
 		//note: bedtime should always be at, or before, midnight
-		return endTime.getHour() <= 4
+		return endTime.getHour() <= HOUR_OF_4_AM
 				|| !bedTime.isAfter(endTime);
 	}
 
@@ -152,7 +153,7 @@ public class BabySitterChargeCalculator {
 
 	@VisibleForTesting
 	static int hoursPostBedTime(LocalTime startTime, LocalTime bedTime, LocalTime endTime) {
-		if (endTime.getHour() <= 4) {
+		if (endTime.getHour() <= HOUR_OF_4_AM) {
 			return hoursBeforeMidnight(startTime) - hoursPreBedTime(startTime, bedTime);
 		} else {
 			int endHour = getHourRoundUp(endTime);
