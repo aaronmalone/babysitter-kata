@@ -243,6 +243,8 @@ public class BabySitterChargeCalculatorTest {
 		Assert.assertEquals(56, calculateNightlyCharge(time(17, 00), time(17,00), LocalTime.MIDNIGHT));
 		Assert.assertEquals(72, calculateNightlyCharge(time(17, 00), time(17,00), LocalTime.MIDNIGHT.plusNanos(1)));
 		Assert.assertEquals(72, calculateNightlyCharge(time(17, 00), time(17,00), time(1, 00)));
+		Assert.assertEquals(76, calculateNightlyCharge(time(17, 00), time(17, 01), time(1, 00)));
+		Assert.assertEquals(100, calculateNightlyCharge(time(19, 15), time(21, 30), time(2, 10)));
 	}
 
 	/**
