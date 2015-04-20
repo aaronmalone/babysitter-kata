@@ -27,6 +27,22 @@ public class BabySitterChargeCalculatorTest {
 		}
 	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void testStartTimeBeforeFiveThrowsException() {
+		LocalTime invalidStartTime = time(16, 59);
+		LocalTime bedTime = time(18, 00);
+		LocalTime endTime = time(20, 30);
+		BabySitterChargeCalculator.checkArguments(invalidStartTime, bedTime, endTime);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testStartTimeAfterMidnightThrowsException() {
+		LocalTime afterMidnightStartTime = LocalTime.MIDNIGHT.plusMinutes(30);
+		LocalTime bedTime = time(18, 00);
+		LocalTime endTime = time(20, 30);
+		BabySitterChargeCalculator.checkArguments(afterMidnightStartTime, bedTime, endTime);
+	}
+
 	@Test
 	public void testThatBedTimeNotBeforeStartTime() {
 		LocalTime startTime = time(18, 00);
