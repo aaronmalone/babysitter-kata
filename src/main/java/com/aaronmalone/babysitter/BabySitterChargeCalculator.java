@@ -111,21 +111,6 @@ public class BabySitterChargeCalculator {
 	}
 
 	/**
-	 * Returns the number of hours worked after midnight, based on the end time.
-	 * Fractional hours are rounded up to a whole hour.
-	 */
-	@VisibleForTesting
-	static int hoursAfterMidnight(LocalTime endTime) {
-		int hour = endTime.getHour();
-		if (hour > FOUR_AM.getHour()) {
-			//actually, in this scenario, before midnight
-			return 0;
-		} else {
-			return getHourRoundUp(endTime);
-		}
-	}
-
-	/**
 	 * Returns the charge, in dollars, for hours worked before bedtime.
 	 * Fractional hours are rounded up. If a both pre- and post-bedtime
 	 * babysitting occur in the same hour, the hour is counted as
@@ -198,6 +183,31 @@ public class BabySitterChargeCalculator {
 	}
 
 	/**
+	 * Returns the charge, in dollars, for hours worked after midnight.
+	 * Fractional hours are rounded up.
+	 */
+	@VisibleForTesting
+	static int getChargeForAfterMidnight(LocalTime endTime) {
+		int hours = hoursAfterMidnight(endTime);
+		return hours * AFTER_MIDNIGHT_RATE;
+	}
+
+	/**
+	 * Returns the number of hours worked after midnight, based on the end time.
+	 * Fractional hours are rounded up to a whole hour.
+	 */
+	@VisibleForTesting
+	static int hoursAfterMidnight(LocalTime endTime) {
+		int hour = endTime.getHour();
+		if (hour > FOUR_AM.getHour()) {
+			//actually, in this scenario, before midnight
+			return 0;
+		} else {
+			return getHourRoundUp(endTime);
+		}
+	}
+
+	/**
 	 * Returns the hour of the {@link LocalTime}, rounded up if the time has
 	 * passed exactly n-o'clock.
 	 * <p>
@@ -210,15 +220,5 @@ public class BabySitterChargeCalculator {
 		} else {
 			return hour;
 		}
-	}
-
-	/**
-	 * Returns the charge, in dollars, for hours worked after midnight.
-	 * Fractional hours are rounded up.
-	 */
-	@VisibleForTesting
-	static int getChargeForAfterMidnight(LocalTime endTime) {
-		int hours = hoursAfterMidnight(endTime);
-		return hours * AFTER_MIDNIGHT_RATE;
 	}
 }
