@@ -111,17 +111,6 @@ public class BabySitterChargeCalculator {
 	}
 
 	/**
-	 * Returns the total number of hours worked before midnight, both pre- and post-bedtime,
-	 * based on the start time.
-	 * Fractional hours are rounded up to a whole hour.
-	 */
-	@VisibleForTesting
-	static int hoursBeforeMidnight(LocalTime startTime) {
-		int hour = startTime.getHour();
-		return hour == HOUR_OF_MIDNIGHT ? 0 : 24 - hour;
-	}
-
-	/**
 	 * Returns the number of hours worked after midnight, based on the end time.
 	 * Fractional hours are rounded up to a whole hour.
 	 */
@@ -171,6 +160,17 @@ public class BabySitterChargeCalculator {
 			int totalHours = endHour - startHour;
 			return totalHours - hoursPreBedTime(startTime, bedTime);
 		}
+	}
+
+	/**
+	 * Returns the total number of hours worked before midnight, both pre- and post-bedtime,
+	 * based on the start time.
+	 * Fractional hours are rounded up to a whole hour.
+	 */
+	@VisibleForTesting
+	static int hoursBeforeMidnight(LocalTime startTime) {
+		int hour = startTime.getHour();
+		return hour == HOUR_OF_MIDNIGHT ? 0 : 24 - hour;
 	}
 
 	/**
