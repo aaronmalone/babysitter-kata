@@ -38,10 +38,9 @@ import java.time.LocalTime;
  * for the entire 10-o'clock hour).</li>
  * </ul>
  */
-@SuppressWarnings("OctalInteger") //so we can use "00" for minutes
 public class BabySitterChargeCalculator {
 
-	private static final LocalTime FOUR_AM = LocalTime.of(4, 00);
+	private static final LocalTime FOUR_AM = LocalTime.of(4, 0);
 
 	@VisibleForTesting
 	static final int AFTER_MIDNIGHT_RATE = 16;
@@ -217,7 +216,7 @@ public class BabySitterChargeCalculator {
 	 */
 	private static int getHourRoundUp(LocalTime t) {
 		int hour = t.getHour();
-		if (t.isAfter(LocalTime.of(hour, 00))) {
+		if (t.isAfter(LocalTime.of(hour, 0))) {
 			return hour + 1;
 		} else {
 			return hour;
