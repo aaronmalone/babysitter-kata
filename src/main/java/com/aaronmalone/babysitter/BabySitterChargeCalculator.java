@@ -155,6 +155,18 @@ public class BabySitterChargeCalculator {
 	}
 
 	/**
+	 * Returns the charge, in dollars, for hours worked after bedtime
+	 * and before midnight. If a both pre- and post-bedtime
+	 * babysitting occur in the same hour, the hour is counted as
+	 * before bedtime.
+	 */
+	@VisibleForTesting
+	static int getChargeForAfterBedTime(LocalTime startTime, LocalTime bedTime, LocalTime endTime) {
+		int hours = hoursPostBedTime(startTime, bedTime, endTime);
+		return hours * AFTER_BEDTIME_RATE;
+	}
+
+	/**
 	 * Returns the number of hours that will be used to factor the
 	 * charge between bed time and either midnight or the end time,
 	 * whichever is earlier.
@@ -208,17 +220,5 @@ public class BabySitterChargeCalculator {
 	static int getChargeForAfterMidnight(LocalTime endTime) {
 		int hours = hoursAfterMidnight(endTime);
 		return hours * AFTER_MIDNIGHT_RATE;
-	}
-
-	/**
-	 * Returns the charge, in dollars, for hours worked after bedtime
-	 * and before midnight. If a both pre- and post-bedtime
-	 * babysitting occur in the same hour, the hour is counted as
-	 * before bedtime.
-	 */
-	@VisibleForTesting
-	static int getChargeForAfterBedTime(LocalTime startTime, LocalTime bedTime, LocalTime endTime) {
-		int hours = hoursPostBedTime(startTime, bedTime, endTime);
-		return hours * AFTER_BEDTIME_RATE;
 	}
 }
