@@ -1,6 +1,5 @@
 package com.aaronmalone.babysitter;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.time.LocalTime;
@@ -74,11 +73,8 @@ public class BabySitterChargeCalculatorTest {
 
 	@Test
 	public void testHoursAfterMidnightMethodWithTimesNotAfterMidnight() {
-		//note: static import of method to save space
-		LocalTime[] timesBeforeMidnight = {LocalTime.MAX, time(23, 00), time(17, 00)};
-		for (LocalTime endTime : timesBeforeMidnight) {
-			assertEquals(0, hoursAfterMidnight(endTime));
-		}
+		//note: there are zero hours after midnight if endTime is at or before midnight
+		assertEquals(0, hoursAfterMidnight(LocalTime.MAX /* 23:59:59.99... */));
 		assertEquals(0, hoursAfterMidnight(LocalTime.MIDNIGHT));
 	}
 
