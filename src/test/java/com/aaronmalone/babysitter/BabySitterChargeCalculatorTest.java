@@ -11,22 +11,6 @@ import static org.junit.Assert.assertEquals;
 @SuppressWarnings("OctalInteger") //so we can use "00" for minutes
 public class BabySitterChargeCalculatorTest {
 
-	@Test
-	public void testStartTimeNotBefore5PM() {
-		LocalTime[] invalidStartTimes = {time(3, 00), time(4, 00), time(5, 00), time(12, 00), time(16, 59)};
-		for (LocalTime startTime : invalidStartTimes) {
-			LocalTime bedTime = startTime.plusHours(1);
-			LocalTime endTime = startTime.plusHours(2);
-			try {
-				BabySitterChargeCalculator.checkArguments(startTime, bedTime, endTime);
-				Assert.fail();
-			} catch (IllegalArgumentException e) {
-				// we expected this
-				Assert.assertTrue(e.getMessage().contains("Start time is before 5pm: "));
-			}
-		}
-	}
-
 	@Test(expected = IllegalArgumentException.class)
 	public void testStartTimeBeforeFiveThrowsException() {
 		LocalTime invalidStartTime = time(16, 59);
