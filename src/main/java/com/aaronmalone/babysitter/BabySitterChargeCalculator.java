@@ -212,6 +212,8 @@ public class BabySitterChargeCalculator {
 	 * passed exactly n-o'clock.
 	 * <p>
 	 * For example, <code>getHourRoundUp(LocalTime.of(4, 15)) == 5</code>
+	 * <p>
+	 * Similar to {@link java.lang.Math#ceil(double)}
 	 */
 	private static int getHourRoundUp(LocalTime t) {
 		int hour = t.getHour();
