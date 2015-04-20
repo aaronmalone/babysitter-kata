@@ -56,20 +56,12 @@ public class BabySitterChargeCalculatorTest {
 		BabySitterChargeCalculator.checkArguments(startTime, bedTime, invalidEndTime);
 	}
 
-	@Test
-	public void testThatEndTimeBefore4AM() {
+	@Test(expected = IllegalArgumentException.class)
+	public void testThatEndTimeAfterFourAmThrowsException() {
 		LocalTime startTime = time(17, 00);
 		LocalTime bedTime = time(21, 00);
-		LocalTime[] invalidEndTimes = {time(4, 10), time(5, 00), time(11, 00), time(16, 00)};
-		for (LocalTime endTime : invalidEndTimes) {
-			try {
-				BabySitterChargeCalculator.checkArguments(startTime, bedTime, endTime);
-				Assert.fail();
-			} catch (IllegalArgumentException e) {
-				// we expected this
-				Assert.assertTrue(e.getMessage().contains("End time is after 4am: "));
-			}
-		}
+		LocalTime invalidEndTime = time(4, 30);
+		BabySitterChargeCalculator.checkArguments(startTime, bedTime, invalidEndTime);
 	}
 
 	@Test
