@@ -27,23 +27,12 @@ public class BabySitterChargeCalculatorTest {
 		BabySitterChargeCalculator.checkArguments(afterMidnightStartTime, bedTime, endTime);
 	}
 
-	@Test
-	public void testThatBedTimeNotBeforeStartTime() {
+	@Test(expected = IllegalArgumentException.class)
+	public void testThatExceptionThrowIfBedTimeBeforeStartTime() {
 		LocalTime startTime = time(18, 00);
-		LocalTime invalidBedTime = time(17, 15);
+		LocalTime invalidBedTimeBeforeStartTime = time(17, 15);
 		LocalTime endTime = time(23, 00);
-		try {
-			BabySitterChargeCalculator.checkArguments(startTime, invalidBedTime, endTime);
-			Assert.fail();
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(e.getMessage().contains("Bed time is before start time."));
-			// we expected this
-		}
-		LocalTime earlierStartTime = time(17, 10);
-		BabySitterChargeCalculator.checkArguments(earlierStartTime, invalidBedTime, endTime);
-
-		//test case where bed time is midnight
-		BabySitterChargeCalculator.checkArguments(time(17, 00), LocalTime.MIDNIGHT, time(1, 00));
+		BabySitterChargeCalculator.checkArguments(startTime, invalidBedTimeBeforeStartTime, endTime);
 	}
 
 	@Test
