@@ -93,14 +93,12 @@ public class BabySitterChargeCalculator {
 	}
 
 	private static boolean isEndTimeNotAfter4am(LocalTime endTime) {
-		return !endTime.isAfter(FOUR_AM)
-				|| endTime.getHour() >= HOUR_OF_5_PM;
+		return !endTime.isAfter(FOUR_AM) || endTime.getHour() >= HOUR_OF_5_PM;
 
 	}
 
 	private static boolean isBedTimeNotAfterMidnight(LocalTime bedTime) {
-		return bedTime.equals(LocalTime.MIDNIGHT)
-				|| bedTime.getHour() >= HOUR_OF_5_PM;
+		return bedTime.equals(LocalTime.MIDNIGHT) || bedTime.getHour() >= HOUR_OF_5_PM;
 	}
 
 	private static boolean isBedTimeNotBeforeStartTime(LocalTime startTime, LocalTime bedTime) {
@@ -109,8 +107,7 @@ public class BabySitterChargeCalculator {
 
 	private static boolean isEndTimeNotBeforeBedTime(LocalTime bedTime, LocalTime endTime) {
 		//note: bedtime should always be at, or before, midnight
-		return endTime.getHour() <= HOUR_OF_4_AM
-				|| !bedTime.isAfter(endTime);
+		return endTime.getHour() <= HOUR_OF_4_AM || !bedTime.isAfter(endTime);
 	}
 
 	/**
