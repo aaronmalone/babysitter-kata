@@ -36,6 +36,19 @@ public class BabySitterChargeCalculatorTest {
 	}
 
 	@Test
+	public void testThatMidnightBedtimeIsAllowed() {
+		/*
+		 * LocalTime.MIDNIGHT is technically "before" every other valid LocalTime value,
+		 * but if the bed time is midnight, we don't want to throw the same exception that
+		 * we would throw if the bed time were actually before the start time.
+		 */
+		LocalTime startTime = time(18, 00);
+		LocalTime midnightBedtime = LocalTime.MIDNIGHT;
+		LocalTime endTime = LocalTime.MIDNIGHT.plusHours(2);
+		BabySitterChargeCalculator.checkArguments(startTime, midnightBedtime, endTime);
+	}
+
+	@Test
 	public void testThatEndTimeNotBeforeBedTime() {
 		LocalTime startTime = time(18, 00);
 		LocalTime bedTime = time(20, 00);
