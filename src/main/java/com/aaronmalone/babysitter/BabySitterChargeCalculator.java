@@ -89,7 +89,7 @@ public class BabySitterChargeCalculator {
 
 	private static boolean isStartTimeNotBefore5pm(LocalTime startTime) {
 		int hour = startTime.getHour();
-		return hour >= HOUR_OF_5_PM || hour == HOUR_OF_MIDNIGHT;
+		return hour >= HOUR_OF_5_PM || startTime.equals(LocalTime.MIDNIGHT);
 	}
 
 	private static boolean isEndTimeNotAfter4am(LocalTime endTime) {
